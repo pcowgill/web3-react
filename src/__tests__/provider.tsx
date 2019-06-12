@@ -1,8 +1,8 @@
 import 'jest-dom/extend-expect'
 import React from 'react'
-import { fireEvent, render, waitForElement } from 'react-testing-library'
+import { fireEvent, render, waitForElement } from '@testing-library/react'
 
-import Web3Provider, { useWeb3Context, Connectors } from '../src'
+import Web3Provider, { useWeb3Context, Connectors } from '..'
 
 const { NetworkOnlyConnector } = Connectors
 
@@ -38,23 +38,19 @@ function MyChildComponent(): any {
 
 // TODO remove once https://github.com/kentcdodds/react-testing-library/issues/281 is resolved
 const originalError = console.error // eslint-disable-line no-console
-beforeAll(
-  (): void => {
-    // eslint-disable-next-line no-console
-    console.error = (...args: any[]): void => {
-      if (/Warning.*not wrapped in act/.test(args[0])) {
-        return
-      }
-      originalError.call(console, ...args)
+beforeAll((): void => {
+  // eslint-disable-next-line no-console
+  console.error = (...args: any[]): void => {
+    if (/Warning.*not wrapped in act/.test(args[0])) {
+      return
     }
+    originalError.call(console, ...args)
   }
-)
+})
 
-afterAll(
-  (): void => {
-    console.error = originalError // eslint-disable-line no-console
-  }
-)
+afterAll((): void => {
+  console.error = originalError // eslint-disable-line no-console
+})
 
 test('Rendering', async (): Promise<void> => {
   const { getByTestId, queryByTestId } = render(<MyComponent />)

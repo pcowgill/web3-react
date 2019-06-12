@@ -1,8 +1,3 @@
-branches:
-  only:
-    - latest
-    - next
-    - unstable
 language: node_js
 node_js:
   - '10'
@@ -15,4 +10,4 @@ script:
   - yarn test
   - yarn build
 after_script:
-  - yarn coverage | coveralls
+  - yarn coverage

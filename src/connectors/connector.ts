@@ -9,7 +9,7 @@ export interface ErrorCodes {
 }
 
 export interface ConnectorArguments {
-  readonly supportedNetworks?: ReadonlyArray<number>
+  readonly supportedNetworks?: number[]
 }
 
 export function ErrorCodeMixin(Base: any, errorCodes: string[]): any {
@@ -29,7 +29,7 @@ export function ErrorCodeMixin(Base: any, errorCodes: string[]): any {
 
 const ConnectorErrorCodes = ['UNSUPPORTED_NETWORK']
 export default abstract class Connector extends ErrorCodeMixin(EventEmitter, ConnectorErrorCodes) {
-  public readonly supportedNetworks: ReadonlyArray<number> | undefined
+  public readonly supportedNetworks: number[] | undefined
 
   public constructor(kwargs: ConnectorArguments = {}) {
     super()

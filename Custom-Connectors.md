@@ -7,7 +7,7 @@ Building your own connector is as simple as defining a class that implements a s
 First, define your connector class:
 
 ```javascript
-import { Connectors } from `web3-react`
+import { Connectors } from 'web3-react'
 const { Connector } = Connectors
 
 class MyConnector extends Connector {
@@ -56,7 +56,7 @@ import { subproviders } from 'web3-react'
 If your connector emits custom error codes that you want to recognize and deal with in specific ways within your dApp, your connector should be defined as follows:
 
 ```javascript
-import { Connectors } from `web3-react`
+import { Connectors } from 'web3-react'
 const { Connector, ErrorCodeMixin } = Connectors
 
 const MyConnectorErrorCodes = ['MY_ERROR_CODE', ...]

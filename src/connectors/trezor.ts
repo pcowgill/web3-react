@@ -1,11 +1,7 @@
-// lightly adapted from https://github.com/0xProject/0x-monorepo/pull/1431
-// TODO replace with offical implementation when TrezorSubprovider gets added to 0x/subproviders
-// TODO add event listeners per https://github.com/trezor/connect/blob/develop/docs/events.md ?
-import { RPCSubprovider, Web3ProviderEngine } from '@0x/subproviders'
+import { Web3ProviderEngine, RPCSubprovider, TrezorSubprovider } from '@0x/subproviders'
 
-import { Provider } from '../../manager'
-import Connector from '../connector'
-import TrezorSubprovider from './subprovider'
+import { Provider } from '../manager'
+import Connector from './connector'
 
 interface SupportedNetworkURLs {
   readonly [propName: string]: string
@@ -25,11 +21,12 @@ export default class TrezorConnector extends Connector {
   private defaultNetwork: number
   private readonly manifestEmail: string
   private readonly manifestAppUrl: string
+  private engine: any
 
   public constructor(kwargs: TrezorConnectorArguments) {
     const { api: TrezorConnect, supportedNetworkURLs, defaultNetwork, manifestEmail, manifestAppUrl } = kwargs
-    const supportedNetworks = Object.keys(supportedNetworkURLs).map(
-      (supportedNetworkURL): number => Number(supportedNetworkURL)
+    const supportedNetworks = Object.keys(supportedNetworkURLs).map((supportedNetworkURL): number =>
+      Number(supportedNetworkURL)
     )
     super({ supportedNetworks })
 
